@@ -1,6 +1,6 @@
 package com.tj.designacoes.controller;
 
-import com.tj.designacoes.dto.EscalaRequestDTO;
+import com.tj.designacoes.dto.EscalaSomDTO;
 import com.tj.designacoes.service.EscalaExcelService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +14,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/escala")
-public class EscalaController {
+public class EscalaSomController {
 
     private final EscalaExcelService service;
 
-    public EscalaController(EscalaExcelService service) {
+    public EscalaSomController(EscalaExcelService service) {
         this.service = service;
     }
 
     @PostMapping("/excel")
-    public ResponseEntity<byte[]> gerarExcel(@RequestBody EscalaRequestDTO dto) throws Exception {
+    public ResponseEntity<byte[]> gerarExcelSom(@RequestBody EscalaSomDTO dto) throws Exception {
 
         List<DayOfWeek> dias = dto.getDiasSemana()
                 .stream()
