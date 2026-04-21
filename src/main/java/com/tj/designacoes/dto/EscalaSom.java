@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class EscalaSomDTO {
+public class EscalaSom {
     private List<String> pessoas;
     private List<String> funcoes;
     private List<String> diasSemana;

@@ -1,6 +1,6 @@
 package com.tj.designacoes.controller;
 
-import com.tj.designacoes.dto.UsuarioDTO;
+import com.tj.designacoes.dto.Usuario;
 import com.tj.designacoes.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +19,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/criacao")
-    public ResponseEntity<Integer> criarUsuario(@RequestBody UsuarioDTO usuario){
+    public ResponseEntity<Integer> criarUsuario(@RequestBody Usuario usuario){
         return ResponseEntity.ok(service.salvarUsuario(usuario));
     }
 

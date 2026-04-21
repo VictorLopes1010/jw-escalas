@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class VmcDTO {
+public class Vmc {
     private Integer id;
     private LocalDateTime dataInicio;
     private LocalDateTime dataFim;
-    private List<VmcParteDTO> partes;
+    private List<VmcParte> partes;
 }

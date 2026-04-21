@@ -1,7 +1,6 @@
 package com.tj.designacoes.service.impl;
 
-import com.tj.designacoes.dto.UsuarioDTO;
-import com.tj.designacoes.entity.Usuario;
+import com.tj.designacoes.dto.Usuario;
 import com.tj.designacoes.exception.RecursoNaoEncontradoException;
 import com.tj.designacoes.exception.RegraNegocioException;
 import com.tj.designacoes.mapper.UsuarioMapper;
@@ -24,11 +23,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
-    public Integer salvarUsuario(UsuarioDTO dto) {
+    public Integer salvarUsuario(Usuario dto) {
 
         boolean isEdicao = dto.getId() != null;
 
-        Usuario usuario = isEdicao
+        com.tj.designacoes.entity.Usuario usuario = isEdicao
                 ? repository.findById(dto.getId())
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado"))
                 : mapper.toEntity(dto);
@@ -51,7 +50,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         if (!isEdicao) {
-            Usuario criador = repository.findById(dto.getUsuarioCriacaoId())
+            com.tj.designacoes.entity.Usuario criador = repository.findById(dto.getUsuarioCriacaoId())
                     .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário criador não encontrado"));
 
             usuario.setUsuarioCriacao(criador);
@@ -59,7 +58,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         if (isEdicao && dto.getUsuarioAlteracaoId() != null) {
-            Usuario alterador = repository.findById(dto.getUsuarioAlteracaoId())
+            com.tj.designacoes.entity.Usuario alterador = repository.findById(dto.getUsuarioAlteracaoId())
                     .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário alterador não encontrado"));
 
             usuario.setUsuarioAlteracao(alterador);

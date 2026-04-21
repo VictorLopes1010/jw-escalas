@@ -1,9 +1,8 @@
 package com.tj.designacoes.service.impl;
 
-import com.tj.designacoes.dto.VmcDTO;
-import com.tj.designacoes.dto.VmcParteDTO;
-import com.tj.designacoes.dto.VmcParteParticipanteDTO;
-import com.tj.designacoes.entity.*;
+import com.tj.designacoes.dto.Vmc;
+import com.tj.designacoes.dto.VmcParte;
+import com.tj.designacoes.dto.VmcParteParticipante;
 import com.tj.designacoes.enumarate.ParteReuniao;
 import com.tj.designacoes.repository.VmcRepository;
 import com.tj.designacoes.service.VmcService;
@@ -22,65 +21,65 @@ public class VmcServiceImpl implements VmcService {
 
     @Override
     @Transactional
-    public Vmc salvar(VmcDTO dto) {
+    public com.tj.designacoes.entity.Vmc salvar(Vmc dto) {
 
-        Vmc vmc;
+        com.tj.designacoes.entity.Vmc vmc;
 
         if (dto.getId() != null) {
             vmc = vmcRepository.findById(dto.getId())
                     .orElseThrow(() -> new RuntimeException("VMC não encontrado"));
         } else {
-            vmc = new Vmc();
+            vmc = new com.tj.designacoes.entity.Vmc();
         }
 
         vmc.setDataInicio(dto.getDataInicio());
         vmc.setDataFim(dto.getDataFim());
 
-        Map<Integer, VmcParte> partesExistentes = new HashMap<>();
+        Map<Integer, com.tj.designacoes.entity.VmcParte> partesExistentes = new HashMap<>();
 
         if (vmc.getPartes() != null) {
-            for (VmcParte p : vmc.getPartes()) {
+            for (com.tj.designacoes.entity.VmcParte p : vmc.getPartes()) {
                 partesExistentes.put(p.getId(), p);
             }
         } else {
             vmc.setPartes(new ArrayList<>());
         }
 
-        List<VmcParte> novasPartes = new ArrayList<>();
+        List<com.tj.designacoes.entity.VmcParte> novasPartes = new ArrayList<>();
 
-        for (VmcParteDTO parteDTO : dto.getPartes()) {
+        for (VmcParte parteDTO : dto.getPartes()) {
 
-            VmcParte parte;
+            com.tj.designacoes.entity.VmcParte parte;
 
             if (parteDTO.getId() != null && partesExistentes.containsKey(parteDTO.getId())) {
                 parte = partesExistentes.get(parteDTO.getId());
             } else {
-                parte = new VmcParte();
+                parte = new com.tj.designacoes.entity.VmcParte();
                 parte.setVmc(vmc);
             }
 
             parte.setParteReuniao(ParteReuniao.fromDescricao(parteDTO.getTipo()));
 
-            Map<Integer, VmcParteParticipante> participantesExistentes = new HashMap<>();
+            Map<Integer, com.tj.designacoes.entity.VmcParteParticipante> participantesExistentes = new HashMap<>();
 
             if (parte.getParticipantes() != null) {
-                for (VmcParteParticipante p : parte.getParticipantes()) {
+                for (com.tj.designacoes.entity.VmcParteParticipante p : parte.getParticipantes()) {
                     participantesExistentes.put(p.getId(), p);
                 }
             } else {
                 parte.setParticipantes(new ArrayList<>());
             }
 
-            List<VmcParteParticipante> novosParticipantes = new ArrayList<>();
+            List<com.tj.designacoes.entity.VmcParteParticipante> novosParticipantes = new ArrayList<>();
 
-            for (VmcParteParticipanteDTO partDTO : parteDTO.getParticipantes()) {
+            for (VmcParteParticipante partDTO : parteDTO.getParticipantes()) {
 
-                VmcParteParticipante participante;
+                com.tj.designacoes.entity.VmcParteParticipante participante;
 
                 if (partDTO.getId() != null && participantesExistentes.containsKey(partDTO.getId())) {
                     participante = participantesExistentes.get(partDTO.getId());
                 } else {
-                    participante = new VmcParteParticipante();
+                    participante = new com.tj.designacoes.entity.VmcParteParticipante();
                     participante.setVmcParte(parte);
                 }
 
