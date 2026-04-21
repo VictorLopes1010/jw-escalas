@@ -4,10 +4,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Data
-public class EscalaRequestDTO {
+public class EscalaSomDTO {
     private List<String> pessoas;
     private List<String> funcoes;
     private List<String> diasSemana;
