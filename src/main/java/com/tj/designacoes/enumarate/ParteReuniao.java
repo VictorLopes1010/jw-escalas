@@ -22,7 +22,7 @@ public enum ParteReuniao {
         return Arrays.stream(values())
                 .filter(e -> e.descricao.equalsIgnoreCase(descricao))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("ParteReuniao inválida: " + descricao));
+                .orElseThrow(() -> new IllegalArgumentException("Parte Reuniao inválida: " + descricao));
     }
 
     public static int getOrdinalByDescricao(String descricao) {

@@ -94,7 +94,7 @@ public class VmcServiceImpl implements VmcService {
 
             novasPartes.add(parte);
         }
-        
+
         vmc.getPartes().clear();
         vmc.getPartes().addAll(novasPartes);
 

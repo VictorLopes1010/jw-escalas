@@ -13,7 +13,7 @@ public class Vmc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "DATA_INICIO", nullable = false)
     private LocalDateTime dataInicio;
