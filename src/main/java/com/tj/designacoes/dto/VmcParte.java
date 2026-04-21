@@ -4,8 +4,8 @@ import lombok.Data;
 
 import java.util.List;
 @Data
-public class VmcParteDTO {
+public class VmcParte {
     private Integer id;
     private String tipo;
-    private List<VmcParteParticipanteDTO> participantes;
+    private List<VmcParteParticipante> participantes;
 }

@@ -1,10 +1,9 @@
 package com.tj.designacoes.service;
 
-import com.tj.designacoes.dto.VmcDTO;
-import com.tj.designacoes.entity.Vmc;
+import com.tj.designacoes.dto.Vmc;
 import jakarta.transaction.Transactional;
 
 public interface VmcService {
     @Transactional
-    Vmc salvar(VmcDTO dto);
+    com.tj.designacoes.entity.Vmc salvar(Vmc dto);
 }

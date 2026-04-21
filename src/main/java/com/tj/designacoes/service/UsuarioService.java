@@ -1,7 +1,7 @@
 package com.tj.designacoes.service;
 
-import com.tj.designacoes.dto.UsuarioDTO;
+import com.tj.designacoes.dto.Usuario;
 
 public interface UsuarioService {
-    Integer salvarUsuario(UsuarioDTO usuarioDTO);
+    Integer salvarUsuario(Usuario usuario);
 }
