@@ -1,6 +1,6 @@
 package com.tj.designacoes.mapper;
 
-import com.tj.designacoes.dto.Usuario;
+import com.tj.designacoes.dto.UsuarioDTO;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
@@ -12,9 +12,9 @@ public interface UsuarioMapper {
     @Mapping(target = "dataCriacao", ignore = true)
     @Mapping(target = "dataAlteracao", ignore = true)
     @Mapping(target = "senha", ignore = true)
-    com.tj.designacoes.entity.Usuario toEntity(Usuario dto);
+    com.tj.designacoes.entity.Usuario toEntity(UsuarioDTO dto);
 
-    Usuario toDTO(com.tj.designacoes.entity.Usuario entity);
+    UsuarioDTO toDTO(com.tj.designacoes.entity.Usuario entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "usuarioCriacao", ignore = true)
@@ -22,5 +22,5 @@ public interface UsuarioMapper {
     @Mapping(target = "dataCriacao", ignore = true)
     @Mapping(target = "dataAlteracao", ignore = true)
     @Mapping(target = "senha", ignore = true)
-    void updateEntityFromDto(Usuario dto, @MappingTarget com.tj.designacoes.entity.Usuario entity);
+    void updateEntityFromDto(UsuarioDTO dto, @MappingTarget com.tj.designacoes.entity.Usuario entity);
 }

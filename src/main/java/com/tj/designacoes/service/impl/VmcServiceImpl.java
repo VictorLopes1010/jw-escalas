@@ -1,8 +1,11 @@
 package com.tj.designacoes.service.impl;
 
-import com.tj.designacoes.dto.Vmc;
-import com.tj.designacoes.dto.VmcParte;
-import com.tj.designacoes.dto.VmcParteParticipante;
+import com.tj.designacoes.dto.VmcDTO;
+import com.tj.designacoes.dto.VmcParteDTO;
+import com.tj.designacoes.dto.VmcParteParticipanteDTO;
+import com.tj.designacoes.entity.Vmc;
+import com.tj.designacoes.entity.VmcParte;
+import com.tj.designacoes.entity.VmcParteParticipante;
 import com.tj.designacoes.enumarate.ParteReuniao;
 import com.tj.designacoes.repository.VmcRepository;
 import com.tj.designacoes.service.VmcService;
@@ -21,9 +24,9 @@ public class VmcServiceImpl implements VmcService {
 
     @Override
     @Transactional
-    public com.tj.designacoes.entity.Vmc salvar(Vmc dto) {
+    public Vmc salvar(VmcDTO dto) {
 
-        com.tj.designacoes.entity.Vmc vmc;
+        Vmc vmc;
 
         if (dto.getId() != null) {
             vmc = vmcRepository.findById(dto.getId())
@@ -35,10 +38,10 @@ public class VmcServiceImpl implements VmcService {
         vmc.setDataInicio(dto.getDataInicio());
         vmc.setDataFim(dto.getDataFim());
 
-        Map<Integer, com.tj.designacoes.entity.VmcParte> partesExistentes = new HashMap<>();
+        Map<Integer, VmcParte> partesExistentes = new HashMap<>();
 
         if (vmc.getPartes() != null) {
-            for (com.tj.designacoes.entity.VmcParte p : vmc.getPartes()) {
+            for (VmcParte p : vmc.getPartes()) {
                 partesExistentes.put(p.getId(), p);
             }
         } else {
@@ -47,7 +50,7 @@ public class VmcServiceImpl implements VmcService {
 
         List<com.tj.designacoes.entity.VmcParte> novasPartes = new ArrayList<>();
 
-        for (VmcParte parteDTO : dto.getPartes()) {
+        for (VmcParteDTO parteDTO : dto.getPartes()) {
 
             com.tj.designacoes.entity.VmcParte parte;
 
@@ -60,7 +63,7 @@ public class VmcServiceImpl implements VmcService {
 
             parte.setParteReuniao(ParteReuniao.fromDescricao(parteDTO.getTipo()));
 
-            Map<Integer, com.tj.designacoes.entity.VmcParteParticipante> participantesExistentes = new HashMap<>();
+            Map<Integer, VmcParteParticipante> participantesExistentes = new HashMap<>();
 
             if (parte.getParticipantes() != null) {
                 for (com.tj.designacoes.entity.VmcParteParticipante p : parte.getParticipantes()) {
@@ -70,11 +73,11 @@ public class VmcServiceImpl implements VmcService {
                 parte.setParticipantes(new ArrayList<>());
             }
 
-            List<com.tj.designacoes.entity.VmcParteParticipante> novosParticipantes = new ArrayList<>();
+            List<VmcParteParticipante> novosParticipantes = new ArrayList<>();
 
-            for (VmcParteParticipante partDTO : parteDTO.getParticipantes()) {
+            for (VmcParteParticipanteDTO partDTO : parteDTO.getParticipantes()) {
 
-                com.tj.designacoes.entity.VmcParteParticipante participante;
+                VmcParteParticipante participante;
 
                 if (partDTO.getId() != null && participantesExistentes.containsKey(partDTO.getId())) {
                     participante = participantesExistentes.get(partDTO.getId());
